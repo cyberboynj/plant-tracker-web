@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#f5f5ef" />
+		<title>Sprout | Plant care tracker</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div class="app-shell">
+			<aside class="sidebar">
+				<a class="brand" href="#top" aria-label="Sprout home">
+					<span class="brand-mark">+</span>
+					<span>sprout</span>
+				</a>
+				<div class="sidebar-label">Workspace</div>
+				<nav class="main-nav" aria-label="Main navigation">
+					<a class="nav-link active" href="#top"><span class="nav-icon">◈</span>Overview</a>
+					<a class="nav-link" href="#plants"><span class="nav-icon">✦</span>My plants</a>
+					<a class="nav-link" href="#calendar"><span class="nav-icon">□</span>Calendar</a>
+				</nav>
+				<div class="sidebar-note">
+					<span class="note-spark">✳</span>
+					<strong>Small care,<br />big growth.</strong>
+					<span>Keep a gentle rhythm and your plants will do the rest.</span>
+				</div>
+				<div class="sidebar-footer"><span class="online-dot"></span> All caught up</div>
+			</aside>
+
+			<main class="main-content" id="top">
+				<header class="topbar">
+					<div class="breadcrumb"><span>My garden</span><span>/</span><strong>Overview</strong></div>
+					<div class="top-actions">
+						<button class="icon-button" type="button" aria-label="Notifications"><span class="notification-dot"></span>♢</button>
+						<div class="avatar" aria-label="User profile">CB</div>
+					</div>
+				</header>
+
+				<div class="page-heading">
+					<div>
+						<p class="eyebrow">Sunday, August 23, 2026</p>
+						<h1>Good morning, plant parent.</h1>
+						<p class="heading-copy">A little attention today keeps your garden growing beautifully.</p>
+					</div>
+					<button class="primary-button" id="open-add" type="button"><span>+</span> Add a plant</button>
+				</div>
+
+				<section class="stats-grid" aria-label="Garden summary">
+					<article class="stat-card stat-focus">
+						<div class="stat-icon water-icon">⌁</div>
+						<div><span class="stat-label">Needs water</span><strong id="needs-water">0</strong><span class="stat-detail">plants today</span></div>
+						<span class="stat-arrow">↗</span>
+					</article>
+					<article class="stat-card">
+						<div class="stat-icon leaf-icon">✦</div>
+						<div><span class="stat-label">Growing well</span><strong id="growing-well">0</strong><span class="stat-detail">on schedule</span></div>
+					</article>
+					<article class="stat-card">
+						<div class="stat-icon sun-icon">☼</div>
+						<div><span class="stat-label">Garden total</span><strong id="garden-total">0</strong><span class="stat-detail">happy plants</span></div>
+					</article>
+				</section>
+
+				<section class="content-section" id="plants">
+					<div class="section-heading">
+						<div><h2>Your plants</h2><span class="section-count" id="plant-count">0 plants</span></div>
+						<div class="list-tools">
+							<label class="search-box"><span>⌕</span><input id="plant-search" type="search" placeholder="Search plants" /></label>
+							<select id="status-filter" aria-label="Filter plants by status"><option value="all">All plants</option><option value="due">Needs water</option><option value="on-track">On track</option></select>
+						</div>
+					</div>
+					<div class="plant-list" id="plant-list"></div>
+					<div class="empty-state" id="empty-state" hidden>
+						<div class="empty-illustration">✿</div>
+						<h3>Your garden is waiting</h3>
+						<p>Add your first plant to start keeping its care rhythm.</p>
+						<button class="secondary-button" id="empty-add" type="button">Add your first plant</button>
+					</div>
+				</section>
+
+				<section class="bottom-grid" id="calendar">
+					<article class="insight-panel">
+						<div class="panel-heading"><div><p class="eyebrow">Garden note</p><h2>Consistency beats intensity.</h2></div><span class="panel-sun">☼</span></div>
+						<p>Plants thrive on a steady routine. Check in often, water deeply, and let the soil guide you.</p>
+						<div class="week-strip" aria-label="This week"><span class="week-done">M</span><span class="week-done">T</span><span class="week-done">W</span><span class="week-today">T</span><span>F</span><span>S</span><span>S</span></div>
+					</article>
+					<article class="upcoming-panel">
+						<div class="panel-heading"><div><p class="eyebrow">Coming up</p><h2>Next 7 days</h2></div><span class="calendar-icon">□</span></div>
+						<div id="upcoming-list" class="upcoming-list"></div>
+					</article>
+				</section>
+				<footer class="page-footer">Sprout <span>·</span> tending to the little things</footer>
+			</main>
+		</div>
+
+		<div class="modal-backdrop" id="modal-backdrop" hidden>
+			<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+				<button class="modal-close" id="close-modal" type="button" aria-label="Close">×</button>
+				<p class="eyebrow">New addition</p><h2 id="modal-title">Add a plant</h2><p class="modal-copy">Set a simple rhythm and Sprout will help you stay on top of it.</p>
+				<form id="plant-form">
+					<label>Plant name<input name="name" required maxlength="40" placeholder="e.g. Monstera" /></label>
+					<label>Water every <span class="input-with-suffix"><input name="interval" required type="number" min="1" max="365" value="7" /><span>days</span></span></label>
+					<label>Last watered<input name="lastWatered" required type="date" /></label>
+					<button class="primary-button full-width" type="submit">Add to my garden <span>→</span></button>
+				</form>
+			</div>
+		</div>
+		<script src="scripts.js"></script>
+	</body>
+</html>
